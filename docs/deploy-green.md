@@ -4,7 +4,7 @@
 
 ## 下载
 
-到仓库 [Releases](https://github.com/sxsxhhh/juicePans-web/releases) 下载附件，文件名类似：
+到仓库 [Releases](https://github.com/sxsxhhh/juicePans/releases) 下载附件，文件名类似：
 
 `juicePans-*-web-green.zip`
 
@@ -53,7 +53,7 @@ python server.py
 
 | 方式 | 适合谁 | 入口 |
 |------|--------|------|
-| AI Skill 压缩包 | 装到支持 Skill 的 AI 助手里搜 | Releases 里的 `*-skill.zip` |
+| AI Skill 压缩包 | 装到 Cursor / Codex 等对话里搜 | Releases 里的 `*-skill.zip` |
 | 绿色版 Web | 浏览器本地搜 | Releases 里的 `*-web-green.zip` |
 | Docker | 服务器 / 玩客云 7×24 | 见 [deploy-docker.md](./deploy-docker.md) |
 | 源码本地跑 | 开发调试 | 见 [deploy-local.md](./deploy-local.md) |

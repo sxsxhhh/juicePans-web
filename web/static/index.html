@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>果汁搜盘 · juicePans</title>
-  <link rel="stylesheet" href="/app.css?v=20260917d" />
+  <link rel="stylesheet" href="/app.css?v=20260917m" />
 </head>
 <body>
   <div class="bg-blobs" aria-hidden="true"></div>
@@ -31,8 +31,10 @@
       <form id="searchForm" autocomplete="off">
         <div class="search-row">
           <input id="q" type="search" name="q" placeholder="输入片名、资源名，例如：庆余年" required />
-          <button type="submit" id="btnSearch">搜索</button>
-          <button type="button" id="btnAbort" class="btn-abort" hidden>终止</button>
+          <div class="search-actions">
+            <button type="submit" id="btnSearch">搜索</button>
+            <button type="button" id="btnAbort" class="btn-abort" hidden>终止</button>
+          </div>
         </div>
         <div class="opts-row">
           <label class="switch-row" title="打开后对搜索结果做链接存活检验（确认失效会隐藏；会更慢）">

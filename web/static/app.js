@@ -226,6 +226,7 @@
       setStatus("请至少选择一个搜索引擎。", "error");
       return;
     }
+    // cancel previous
     if (searchAbort) {
       try { searchAbort.abort(); } catch (_) {}
     }
@@ -238,6 +239,7 @@
     setStatus(validate ? "正在聚合检索并检验链接存活…" : "正在聚合检索，请稍候…", "loading");
     resultsEl.innerHTML = "";
 
+    // 超过 6 秒仍无结果返回 → 显示终止按钮
     abortTimer = setTimeout(() => {
       if (myGen !== searchGen) return;
       if (btnAbort) {

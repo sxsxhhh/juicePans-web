@@ -7,7 +7,7 @@
   2. 自建 PanSou：POST /api/check/links（需部署 PANSOU_URL / :8888）。
   3. 其它公开链接：内置 8 类匿名官方/页面检测器（借鉴 fish2018/NetDiskLinkValidator，无需
      cookie/token）覆盖夸克/阿里/115/123/天翼/百度/蓝奏/UC；不支持的类型仍标「未核验」，
-    由 Agent 向用户说明，不假装核验。
+     由 Agent 向用户说明，不假装核验。
   4. 本地四级状态机（借鉴 supansou/DuPanSou-Archive）：有效/疑似失效/确认失效/未核验。
      连续 2 次失败才判死（防误杀）；有效 72h 内不复检，疑似 30min 后才复检，
      失效 12h 后复查是否恢复；磁力/电驴等不可检类型永不误伤；

@@ -1097,6 +1097,7 @@ def run(args):
     return 0 if items or not errors else 1
 
 
+
 def run_search(
     kw: str,
     *,
