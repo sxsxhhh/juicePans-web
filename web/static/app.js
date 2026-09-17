@@ -285,4 +285,20 @@
   form.addEventListener("submit", doSearch);
   renderTabs();
   qEl.focus();
+
+  // 盘种 / 引擎收纳：默认折叠，不持久化
+  document.querySelectorAll(".fold-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const fold = document.getElementById(btn.getAttribute("data-fold"));
+      if (!fold) return;
+      const body = fold.querySelector(".fold-body");
+      const open = btn.getAttribute("aria-expanded") === "true";
+      const next = !open;
+      btn.setAttribute("aria-expanded", next ? "true" : "false");
+      if (body) body.hidden = !next;
+      const hint = btn.querySelector(".fold-hint");
+      if (hint) hint.textContent = next ? "点按收起" : "点按展开";
+    });
+  });
+
 })();

@@ -2,35 +2,47 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>果汁搜盘 · juicePans</title>
-  <link rel="stylesheet" href="/app.css?v=20260917m" />
+  <link rel="stylesheet" href="/app.css?v=20260917q" />
 </head>
 <body>
   <div class="bg-blobs" aria-hidden="true"></div>
   <header class="top">
     <div class="brand">
-      <div class="logo" aria-hidden="true">果</div>
-      <div>
+      <div class="logo" aria-hidden="true" title="果汁">
+        <svg class="logo-svg" viewBox="0 0 48 48" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+          <!-- cup -->
+          <path d="M12 16h20l-2.2 22.5c-.2 1.8-1.7 3.2-3.5 3.2H17.7c-1.8 0-3.3-1.4-3.5-3.2L12 16z" fill="#fff" opacity=".95"/>
+          <path d="M14.2 20h15.6l-1.7 17.2c-.1.9-.8 1.5-1.7 1.5h-9c-.9 0-1.6-.6-1.7-1.5L14.2 20z" fill="#7ec8e3"/>
+          <path d="M16 24h12l-.4 4H16.4L16 24z" fill="#fff" opacity=".35"/>
+          <!-- juice surface -->
+          <ellipse cx="22" cy="16" rx="10" ry="2.2" fill="#5eb3d4"/>
+          <!-- straw -->
+          <rect x="28" y="4" width="3.2" height="22" rx="1.4" transform="rotate(12 29.6 15)" fill="#fff"/>
+          <rect x="28.4" y="4" width="2.4" height="22" rx="1.2" transform="rotate(12 29.6 15)" fill="#e8a87c"/>
+        </svg>
+      </div>
+      <div class="brand-text">
         <h1>果汁搜盘</h1>
-        <div class="brand-meta">
-          <p class="tagline">多源公开网盘检索 · 本地绿色版</p>
-          <a class="wechat-chip" href="#" title="微信搜索并添加，备注：进交流群" onclick="return false;">
-            <img class="wechat-logo" src="/icons/wechat.png" alt="微信" width="22" height="22" />
-            <span class="wechat-text">加微信备注进交流群</span>
-            <span class="wechat-id">sxsxhh2</span>
-          </a>
-        </div>
+        <p class="tagline">多源公开网盘检索 · 本地绿色版</p>
       </div>
     </div>
-    <div class="badge">公开检索（未核验）</div>
+    <div class="top-aside">
+      <a class="wechat-chip" href="#" title="微信搜索并添加，备注：进交流群" onclick="return false;">
+        <img class="wechat-logo" src="/icons/wechat.png" alt="微信" width="22" height="22" />
+        <span class="wechat-text">加微信备注进交流群</span>
+        <span class="wechat-id">sxsxhh2</span>
+      </a>
+      <div class="badge">公开检索（未核验）</div>
+    </div>
   </header>
 
   <main class="shell">
     <section class="search-panel glass">
       <form id="searchForm" autocomplete="off">
         <div class="search-row">
-          <input id="q" type="search" name="q" placeholder="输入片名、资源名，例如：庆余年" required />
+          <input id="q" type="search" name="q" placeholder="没你好果汁吃" required />
           <div class="search-actions">
             <button type="submit" id="btnSearch">搜索</button>
             <button type="button" id="btnAbort" class="btn-abort" hidden>终止</button>
@@ -45,17 +57,28 @@
         </div>
       </form>
 
-      <div class="tabs" id="cloudTabs" role="tablist" aria-label="网盘类型">
-        <!-- filled by JS -->
-      </div>
-
-      <div class="engines">
-        <span class="engines-label">引擎</span>
-        <label><input type="checkbox" name="engine" value="pansou" checked /> 盘搜</label>
-        <label><input type="checkbox" name="engine" value="yunso" checked /> 小云</label>
-        <label><input type="checkbox" name="engine" value="haisou" checked /> 海搜</label>
-        <label class="opt"><input type="checkbox" name="engine" value="panxiaozi" checked /> 盘小子</label>
-        <label class="opt"><input type="checkbox" name="engine" value="ghspider" /> TG库</label>
+      <div class="fold" id="foldFilters">
+        <button type="button" class="fold-toggle" aria-expanded="false" data-fold="foldFilters">
+          <span class="fold-title">盘种与引擎</span>
+          <span class="fold-hint">点按展开</span>
+          <span class="fold-arrow" aria-hidden="true"></span>
+        </button>
+        <div class="fold-body" hidden>
+          <div class="fold-section">
+            <div class="fold-section-label">盘种</div>
+            <div class="tabs" id="cloudTabs" role="tablist" aria-label="网盘类型"></div>
+          </div>
+          <div class="fold-section">
+            <div class="fold-section-label">引擎</div>
+            <div class="engines" id="engineList">
+              <label><input type="checkbox" name="engine" value="pansou" checked /> 盘搜</label>
+              <label><input type="checkbox" name="engine" value="yunso" checked /> 小云</label>
+              <label><input type="checkbox" name="engine" value="haisou" checked /> 海搜</label>
+              <label class="opt"><input type="checkbox" name="engine" value="panxiaozi" checked /> 盘小子</label>
+              <label class="opt"><input type="checkbox" name="engine" value="ghspider" /> TG库</label>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -69,8 +92,7 @@
       <img src="/icons/wechat.png" alt="微信" width="18" height="18" />
       加微信备注进交流群：<strong>sxsxhh2</strong>
     </span>
-    <span>本地 http://127.0.0.1:8765/</span>
   </footer>
-  <script src="/app.js"></script>
+  <script src="/app.js?v=20260917q"></script>
 </body>
 </html>

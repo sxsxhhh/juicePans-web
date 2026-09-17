@@ -1,9 +1,10 @@
-果汁搜盘（juicePans）绿色版 / 本地 Web 使用说明
+果汁搜盘 Web（juicePans-web）绿色版 / 本地 Web 使用说明
+版本：v1.7.2
 ================================================
 
 一、绿色版是什么
   解压即用的本地搜盘网页：双击启动后浏览器打开搜索页。
-  不需要安装 skill，也不依赖 Docker（想用 Docker 请看仓库 docs/deploy-docker.md）。
+  不需要安装 AI Skill，也不依赖 Docker（想用 Docker 请看 docs/deploy-docker.md）。
 
 二、系统要求
   - Windows 10/11，或 macOS / Linux
@@ -11,10 +12,10 @@
   - 无需额外 pip 依赖（纯标准库）
 
 三、Windows 绿色版步骤
-  1. 从 GitHub Releases 下载「web-green」压缩包并解压到任意目录
+  1. 从 GitHub Releases（仓库 juicePans-web）下载 juicePans-v1.7.2-web-green.zip 并解压
   2. 双击 start.bat
   3. 自动打开浏览器：http://127.0.0.1:8765/
-  4. 输入剧名/资料关键词搜索；可勾选引擎、打开「检验链接存活」
+  4. 输入关键词搜索；可展开「盘种与引擎」、打开「检验链接存活」
   5. 搜索超过约 6 秒仍无结果时，可点红色「终止」中断
   6. 关闭黑色命令行窗口即停止服务
 
@@ -25,22 +26,46 @@
     python3 server.py
   浏览器打开 http://127.0.0.1:8765/
 
-五、局域网访问（手机同 Wi‑Fi）
-  启动前设置环境变量再运行：
-    Windows PowerShell:
-      $env:JUICEPANS_HOST="0.0.0.0"
-      $env:JUICEPANS_PORT="8765"
-      python server.py
-    Linux/macOS:
-      export JUICEPANS_HOST=0.0.0.0
-      export JUICEPANS_PORT=8765
-      python3 server.py
-  手机访问：http://<电脑局域网IP>:8765/
+五、以本机电脑为服务器（局域网其它设备访问）——重要
+  目标：手机 / 平板 / 另一台电脑，在同一 Wi‑Fi（或同一局域网）里，用浏览器打开
+        http://电脑的局域网IP:8765/
+  即可使用本机正在运行的果汁搜盘，无需在每台设备上再装一份。
+
+  步骤概要：
+  1）在「当服务器的那台电脑」上启动服务，且必须监听所有网卡（0.0.0.0），不能只绑 127.0.0.1。
+  2）查这台电脑的局域网 IP（常见形如 192.168.x.x）。
+  3）其它设备浏览器输入：http://那台电脑的IP:8765/
+
+  Windows（PowerShell，在解压目录里执行）：
+    $env:JUICEPANS_HOST="0.0.0.0"
+    $env:JUICEPANS_PORT="8765"
+    python server.py
+  查本机局域网 IP 示例：
+    ipconfig
+    （看「无线局域网适配器」或「以太网」下的 IPv4 地址）
+
+  macOS / Linux（在解压目录里执行）：
+    export JUICEPANS_HOST=0.0.0.0
+    export JUICEPANS_PORT=8765
+    python3 server.py
+  查本机局域网 IP 示例：
+    macOS: ipconfig getifaddr en0
+    Linux: hostname -I
+    或：ip addr
+
+  其它设备访问示例：
+    若电脑 IP 是 192.168.0.11，则打开 http://192.168.0.11:8765/
+
+  注意：
+  - 电脑防火墙若拦截 8765，需允许入站（专用网络）。
+  - 手机必须与电脑同一局域网；访客 Wi‑Fi 常隔离设备，可能打不开。
+  - 关掉命令行窗口 / 停止 server.py 后，其它设备也无法再访问。
+  - 双击 start.bat 默认多半只给本机用；要给局域网用，请用上面的环境变量方式启动。
 
 六、常见问题
-  - 双击 start.bat 闪退：多半未装 Python 或未加入 PATH，请先安装 Python 3.8+
+  - 双击 start.bat 闪退：多半未装 Python 或未加入 PATH
   - 端口占用：改 JUICEPANS_PORT 后重启
-  - TG 库搜不到：该源常依赖 GitHub，网络受限时请关掉该引擎，改用盘小子等
+  - TG 库搜不到：该源常依赖 GitHub，网络受限时请关掉该引擎
   - 与「果汁转存」无关：本包只搜索展示链接，不转存
 
 七、合规提醒
