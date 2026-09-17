@@ -1,0 +1,47 @@
+果汁搜盘（juicePans）绿色版 / 本地 Web 使用说明
+================================================
+
+一、绿色版是什么
+  解压即用的本地搜盘网页：双击启动后浏览器打开搜索页。
+  不需要安装 skill，也不依赖 Docker（想用 Docker 请看仓库 docs/deploy-docker.md）。
+
+二、系统要求
+  - Windows 10/11，或 macOS / Linux
+  - 已安装 Python 3.8+（Windows 可从 python.org 安装，勾选 Add to PATH）
+  - 无需额外 pip 依赖（纯标准库）
+
+三、Windows 绿色版步骤
+  1. 从 GitHub Releases 下载「web-green」压缩包并解压到任意目录
+  2. 双击 start.bat
+  3. 自动打开浏览器：http://127.0.0.1:8765/
+  4. 输入剧名/资料关键词搜索；可勾选引擎、打开「检验链接存活」
+  5. 搜索超过约 6 秒仍无结果时，可点红色「终止」中断
+  6. 关闭黑色命令行窗口即停止服务
+
+四、macOS / Linux
+  cd 到解压目录后执行：
+    bash start.sh
+  或：
+    python3 server.py
+  浏览器打开 http://127.0.0.1:8765/
+
+五、局域网访问（手机同 Wi‑Fi）
+  启动前设置环境变量再运行：
+    Windows PowerShell:
+      $env:JUICEPANS_HOST="0.0.0.0"
+      $env:JUICEPANS_PORT="8765"
+      python server.py
+    Linux/macOS:
+      export JUICEPANS_HOST=0.0.0.0
+      export JUICEPANS_PORT=8765
+      python3 server.py
+  手机访问：http://<电脑局域网IP>:8765/
+
+六、常见问题
+  - 双击 start.bat 闪退：多半未装 Python 或未加入 PATH，请先安装 Python 3.8+
+  - 端口占用：改 JUICEPANS_PORT 后重启
+  - TG 库搜不到：该源常依赖 GitHub，网络受限时请关掉该引擎，改用盘小子等
+  - 与「果汁转存」无关：本包只搜索展示链接，不转存
+
+七、合规提醒
+  仅供学习研究；只检索公开分享链接，不托管、不转存文件。请支持正版。
